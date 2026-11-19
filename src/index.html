@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Find useful online tools for maths and writing in Toolbox.">
+  <meta name="theme-color" content="#f6f4eb">
+  <title>Toolbox</title>
+  <link rel="icon" type="image/svg+xml" sizes="any" href="/toolbox-icon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="icon-button" id="menu" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+      <a class="brand" href="/" data-route aria-label="Toolbox home">
+        <span class="toolbox-mark" aria-hidden="true">
+          <span class="toolbox-lid"><span>Tool<strong>box</strong></span></span>
+          <span class="toolbox-rim"></span>
+          <span class="toolbox-slogan" aria-hidden="true">
+            <span class="slogan-word"><span class="slogan-letter" style="--delay: 0ms; --tilt: -13deg">T</span><span class="slogan-letter" style="--delay: 45ms; --tilt: 8deg">o</span><span class="slogan-letter" style="--delay: 90ms; --tilt: -5deg">o</span><span class="slogan-letter" style="--delay: 135ms; --tilt: 12deg">l</span><span class="slogan-letter" style="--delay: 180ms; --tilt: -9deg">s</span></span><span class="slogan-word"><span class="slogan-letter" style="--delay: 225ms; --tilt: 5deg">F</span><span class="slogan-letter" style="--delay: 270ms; --tilt: -11deg">o</span><span class="slogan-letter" style="--delay: 315ms; --tilt: 15deg">r</span></span><span class="slogan-word"><span class="slogan-letter" style="--delay: 360ms; --tilt: -7deg">E</span><span class="slogan-letter" style="--delay: 405ms; --tilt: 10deg">v</span><span class="slogan-letter" style="--delay: 450ms; --tilt: -15deg">e</span><span class="slogan-letter" style="--delay: 495ms; --tilt: 4deg">r</span><span class="slogan-letter" style="--delay: 540ms; --tilt: -3deg">y</span><span class="slogan-letter" style="--delay: 585ms; --tilt: 13deg">t</span><span class="slogan-letter" style="--delay: 630ms; --tilt: -10deg">h</span><span class="slogan-letter" style="--delay: 675ms; --tilt: 7deg">i</span><span class="slogan-letter" style="--delay: 720ms; --tilt: -6deg">n</span><span class="slogan-letter" style="--delay: 765ms; --tilt: 11deg">g</span></span>
+          </span>
+          <span class="toolbox-front"></span>
+        </span>
+      </a>
+    </div>
+  </header>
+  <dialog id="sidebar" class="sidebar" aria-label="Navigation">
+    <div class="sidebar-top">
+      <button class="icon-button close-menu" type="button" aria-label="Close menu" autofocus>×</button>
+      <a class="brand" href="/" data-route aria-label="Toolbox home"><span class="toolbox-mark" aria-hidden="true">
+          <span class="toolbox-lid"><span>Tool<strong>box</strong></span></span>
+          <span class="toolbox-rim"></span>
+          <span class="toolbox-slogan" aria-hidden="true">
+            <span class="slogan-word"><span class="slogan-letter" style="--delay: 0ms; --tilt: -13deg">T</span><span class="slogan-letter" style="--delay: 45ms; --tilt: 8deg">o</span><span class="slogan-letter" style="--delay: 90ms; --tilt: -5deg">o</span><span class="slogan-letter" style="--delay: 135ms; --tilt: 12deg">l</span><span class="slogan-letter" style="--delay: 180ms; --tilt: -9deg">s</span></span><span class="slogan-word"><span class="slogan-letter" style="--delay: 225ms; --tilt: 5deg">F</span><span class="slogan-letter" style="--delay: 270ms; --tilt: -11deg">o</span><span class="slogan-letter" style="--delay: 315ms; --tilt: 15deg">r</span></span><span class="slogan-word"><span class="slogan-letter" style="--delay: 360ms; --tilt: -7deg">E</span><span class="slogan-letter" style="--delay: 405ms; --tilt: 10deg">v</span><span class="slogan-letter" style="--delay: 450ms; --tilt: -15deg">e</span><span class="slogan-letter" style="--delay: 495ms; --tilt: 4deg">r</span><span class="slogan-letter" style="--delay: 540ms; --tilt: -3deg">y</span><span class="slogan-letter" style="--delay: 585ms; --tilt: 13deg">t</span><span class="slogan-letter" style="--delay: 630ms; --tilt: -10deg">h</span><span class="slogan-letter" style="--delay: 675ms; --tilt: 7deg">i</span><span class="slogan-letter" style="--delay: 720ms; --tilt: -6deg">n</span><span class="slogan-letter" style="--delay: 765ms; --tilt: 11deg">g</span></span>
+          </span>
+          <span class="toolbox-front"></span>
+        </span></a>
+    </div>
+    <nav aria-label="Main navigation">
+      <a href="/" data-route>Home</a>
+      <div class="nav-label">Categories</div>
+      <div id="nav-categories"></div>
+      <a href="/search" data-route>Search</a>
+    </nav>
+  </dialog>
+  <main id="main" tabindex="-1"></main>
+  <noscript>Enable JavaScript to use Toolbox.</noscript>
+</body>
+</html>

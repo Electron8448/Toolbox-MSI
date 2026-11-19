@@ -1,0 +1,37 @@
+{
+  "name": "toolbox",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "playwright test",
+    "build:pages": "node scripts/build-pages.js",
+    "start:web": "node server.js",
+    "start:desktop": "electron-forge start",
+    "package": "electron-forge package --platform=win32 --arch=x64",
+    "make:msi": "node scripts/make-msi.mjs",
+    "setup:wix": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/setup-wix.ps1",
+    "test:desktop": "node scripts/test-desktop.mjs",
+    "postinstall": "node scripts/install-electron.mjs",
+    "test:updater": "playwright test playwright/updater.spec.js"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "8.0.1",
+    "@electron-forge/maker-wix": "8.0.1",
+    "@playwright/test": "1.65.1",
+    "electron": "45.4.1"
+  },
+  "productName": "Toolbox",
+  "description": "Toolbox calculators, writing utilities and developer tools for Windows.",
+  "author": "Toolbox",
+  "main": "electron/main.cjs",
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Electron8448/Toolbox-MSI.git"
+  },
+  "homepage": "https://github.com/Electron8448/Toolbox-MSI"
+}
