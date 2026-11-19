@@ -17,9 +17,9 @@
 
 ## Automatic updates and version history
 
-Toolbox Desktop 1.1.0 checks [Electron8448/Toolbox-MSI releases](https://github.com/Electron8448/Toolbox-MSI/releases) automatically and downloads newer MSI installers after verifying their checksums. It asks before restarting to install. Use **Help → Check for updates** for a manual check.
+Toolbox Desktop 1.1.1 checks [Electron8448/Toolbox-MSI releases](https://github.com/Electron8448/Toolbox-MSI/releases) automatically and downloads newer MSI installers after verifying their checksums. It asks before restarting to install. Use **Help → Check for updates** for a manual check.
 
-Read the [versions README](versions/README.md) for release notes, update behaviour and the exact steps for publishing each release. The repository must have a published stable release containing the generated MSI and its .sha256 file. The included **Publish Windows MSI** workflow publishes those assets when a matching version tag is pushed. Install the 1.1.0 MSI manually to add the updater to older installations.
+Read the [versions README](versions/README.md) for release notes, update behaviour and the exact steps for publishing each release. The repository must have a published stable release containing the generated MSI and its .sha256 file. The included **Publish Windows MSI** workflow publishes those assets when a matching version tag is pushed. Install the 1.1.1 MSI manually to add the updater to older installations.
 
 ## Toolbox Desktop for Windows
 
@@ -47,7 +47,7 @@ npm run make:msi
 The command downloads the pinned portable WiX Toolset 3.14.1 into `.build-tools/wix-3.14.1`, verifies the archive's SHA-256 checksum, packages the app with Electron Forge, and creates:
 
 ```text
-out/make/wix/x64/Toolbox-1.1.0.msi
+out/make/wix/x64/Toolbox-1.1.1.msi
 ```
 
 WiX 3 uses the Windows .NET Framework runtime. Install or enable .NET Framework 4.8 if candle.exe or light.exe reports a runtime error. The build uses WiX 3.14.1 because Forge's WiX maker requires WiX 3. The toolset stays inside this project. Run `npm run setup:wix` to download it separately.
@@ -56,7 +56,7 @@ For offline builds, keep the downloaded WiX tools and Electron cache in `.build-
 
 ### Install, upgrade and uninstall
 
-Open `Toolbox-1.1.0.msi` and follow the installer. The default is a per-user installation with a Start menu shortcut. Launch Toolbox from the Start menu.
+Open `Toolbox-1.1.1.msi` and follow the installer. The installer uses limited privileges and installs for the current user in %LOCALAPPDATA%/Programs/Toolbox with a Start menu shortcut. The app runs with the current user’s permissions. Launch Toolbox from the Start menu.
 
 For upgrades, increase `version` in `package.json`, update the lockfile with `npm install --package-lock-only`, rebuild, and run the newer MSI. Keep the application ID and `upgradeCode` in `forge.config.cjs` unchanged. Windows Installer uses that identity to replace the earlier version and rejects downgrades.
 
@@ -86,13 +86,15 @@ Remove-Item Env:TOOLBOX_SKIP_MSI_VALIDATION
 
 This switch only disables the optional WiX validation pass. It does not verify that the installer can install successfully. See [BUILD-RESULTS.md](BUILD-RESULTS.md) for the actual test results and outstanding installation and desktop launch checks.
 
+If a previous version was installed into Program Files with administrator permissions, uninstalling that older copy may require administrator approval. Install the new per-user version afterward.
+
 ### Desktop troubleshooting
 
 - If the first download is interrupted, rerun `npm install`. Electron and WiX caches are kept under `.build-tools/`.
 - If checksum verification fails, delete `.build-tools/wix314-binaries.zip` and rerun `npm run setup:wix`.
 - If Electron reports an AppContainer install-directory ACL error, test from a normal Windows terminal outside the managed agent environment. Keep sandboxing enabled for the app.
 - If an older development window remains open, close it before testing the packaged build. Toolbox uses a single application instance for each user-data directory.
-- For MSI diagnostics, run `msiexec /i "out/make/wix/x64/Toolbox-1.1.0.msi" /L*v "test-results/install.log"`.
+- For MSI diagnostics, run `msiexec /i "out/make/wix/x64/Toolbox-1.1.1.msi" /L*v "test-results/install.log"`.
 - A signing certificate is not configured. Windows may show an unknown-publisher prompt for this local build. Configure Authenticode signing before distributing a signed release.
 
 ## What you can do

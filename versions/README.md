@@ -2,6 +2,18 @@
 
 Repository and downloads are available at [Electron8448/Toolbox-MSI](https://github.com/Electron8448/Toolbox-MSI) and [GitHub Releases](https://github.com/Electron8448/Toolbox-MSI/releases).
 
+## 1.1.1
+
+Prepared locally on 19 November 2026. Publication to GitHub is pending.
+
+- Explicitly sets limited MSI installation privileges.
+- Installs in %LOCALAPPDATA%/Programs/Toolbox for the current user.
+- Stores installer registry entries under the current user's registry hive.
+- Sets the application executable to run as the current user.
+- Updates install into the same user-owned location and restart the updated executable.
+
+Removing an older installation from Program Files can require administrator approval.
+
 ## 1.1.0
 
 Prepared locally on 19 November 2026. Publication to GitHub is pending.
@@ -35,7 +47,7 @@ Initial local desktop build on 19 November 2026.
 5. Create and push the matching tag. For version 1.2.0, run git tag v1.2.0 and git push origin v1.2.0.
 6. GitHub Actions runs Publish Windows MSI, tests the application and publishes a GitHub release with both Toolbox-1.2.0.msi and Toolbox-1.2.0.msi.sha256.
 
-To publish the current version, use tag v1.1.0. Enable GitHub Actions for the repository. A release is available to the updater once it is published as a stable release. Drafts and prereleases are ignored. Committing code alone does not publish an update.
+To publish the current version, use tag v1.1.1. Enable GitHub Actions for the repository. A release is available to the updater once it is published as a stable release. Drafts and prereleases are ignored. Committing code alone does not publish an update.
 
 To publish manually, run npm run make:msi, create a stable GitHub release with the matching version tag and upload both generated files from out/make/wix/x64/. Keep the asset names exactly as generated.
 

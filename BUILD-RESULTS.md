@@ -19,8 +19,10 @@ Verified on 19 November 2026 in the managed Windows build environment.
 - This build is unsigned.
 
 The runnable package is at out/Toolbox-win32-x64/Toolbox.exe.
-The updater-enabled installer is at out/make/wix/x64/Toolbox-1.1.0.msi.
-Its release checksum is at out/make/wix/x64/Toolbox-1.1.0.msi.sha256.
+The updater-enabled installer is at out/make/wix/x64/Toolbox-1.1.1.msi.
+Its release checksum is at out/make/wix/x64/Toolbox-1.1.1.msi.sha256.
 The earlier installer attempt returned Windows Installer error 1601. Playwright may clear test-results/ when running later tests.
 
 Run npm run test:desktop on a normal Windows development machine. Run node scripts/test-desktop.mjs out/Toolbox-win32-x64/Toolbox.exe to test the packaged executable.
+
+Version 1.1.1 explicitly requests limited MSI privileges, stores files under LocalAppDataFolder/Programs/Toolbox and uses current-user registry entries. Updater installations target that same location. Native installation remains unverified because the managed environment blocks the Windows Installer service.

@@ -8,6 +8,7 @@ module.exports = {
     executableName: 'Toolbox',
     appBundleId: 'io.github.electron8448.toolbox',
     appCopyright: 'Toolbox contributors',
+    win32metadata: {'requested-execution-level':'asInvoker'},
     asar: true,
     download: {cacheRoot: path.join(__dirname, '.build-tools', 'electron-cache')},
     icon: path.join(__dirname, 'electron', 'toolbox.ico'),
@@ -33,6 +34,15 @@ module.exports = {
       ui: {chooseDirectory: true},
       beforeCreate(creator) {
         creator.defaultInstallMode = 'perUser';
+        creator.wixTemplate = creator.wixTemplate
+          .replace('InstallScope="{{PackageScope}}"', 'InstallScope="perUser" InstallPrivileges="limited"')
+          .replace(/<Directory Id="{{ProgramFilesFolder}}">([\s\S]*?<!-- {{Directories}} -->[\s\S]*?)<\/Directory>/,
+            '<Directory Id="LocalAppDataFolder"><Directory Id="ToolboxProgramsFolder" Name="Programs">$1</Directory></Directory>')
+          .replaceAll('Root="HKMU"', 'Root="HKCU"');
+        if (!creator.wixTemplate.includes('InstallPrivileges="limited"') ||
+            !creator.wixTemplate.includes('Id="ToolboxProgramsFolder"')) {
+          throw new Error('The per-user installer template could not be configured.');
+        }
         if (process.env.TOOLBOX_SKIP_MSI_VALIDATION === '1') {
           creator.lightSwitches.push('-sval');
           console.warn('WiX ICE validation disabled for this build by TOOLBOX_SKIP_MSI_VALIDATION.');

@@ -3,6 +3,8 @@ $ErrorActionPreference = 'Stop'
 $request = Get-Content -LiteralPath $RequestPath -Raw | ConvertFrom-Json
 $success = $false
 $message = ''
+$installRoot = Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'Programs\Toolbox'
+$updatedExecutable = Join-Path $installRoot 'Toolbox.exe'
 try {
   Wait-Process -Id $request.parentProcess -Timeout 120 -ErrorAction SilentlyContinue
   if (Get-Process -Id $request.parentProcess -ErrorAction SilentlyContinue) {
@@ -25,7 +27,7 @@ try {
   [Runtime.InteropServices.Marshal]::ReleaseComObject($installer) | Out-Null
   $arguments = @('/i', ('"' + $request.installer + '"'), '/passive', '/norestart',
     'MSIINSTALLPERUSER=1',
-    ('APPLICATIONROOTDIRECTORY="' + (Split-Path -Parent $request.executable) + '"'),
+    ('APPLICATIONROOTDIRECTORY="' + $installRoot + '"'),
     '/L*v', ('"' + $request.log + '"'))
   $process = Start-Process -FilePath (Join-Path $env:SystemRoot 'System32/msiexec.exe') -ArgumentList $arguments -WindowStyle Hidden -PassThru -Wait
   if ($process.ExitCode -notin @(0, 1641, 3010)) { throw "Windows Installer returned error $($process.ExitCode)." }
@@ -35,7 +37,8 @@ try {
   $message = $_.Exception.Message
 } finally {
   @{success=$success; message=$message; log=$request.log} | ConvertTo-Json | Set-Content -LiteralPath $request.result -Encoding UTF8
-  if (Test-Path -LiteralPath $request.executable) {
-    Start-Process -FilePath $request.executable -WorkingDirectory (Split-Path -Parent $request.executable) -WindowStyle Hidden
+  $restartExecutable = if ($success) { $updatedExecutable } else { $request.executable }
+  if (Test-Path -LiteralPath $restartExecutable) {
+    Start-Process -FilePath $restartExecutable -WorkingDirectory (Split-Path -Parent $restartExecutable) -WindowStyle Hidden
   }
 }
